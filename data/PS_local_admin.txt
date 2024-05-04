@@ -1,0 +1,31 @@
+REM Ducky Script to open PowerShell and print the current user
+REM ==========================================================
+
+DEFAULTDELAY 200
+DELAY 2000
+
+REM Open PowerShell
+DELAY 500
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 2000
+
+REM Type the command to get the current user$currentPrincipal = New-Obje
+STRING whoami
+ENTER
+DELAY 1000
+
+REM Type the PowerShell command to check if the current user is an admin
+STRING $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent()); $isAdmin = $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator); if ($isAdmin) { Write-Host 'User is an Admin' } else { Write-Host 'User is Not an Admin' }
+ENTER
+DELAY 1000
+
+REM Get the local Administrators group
+STRING # The Local Admins are:
+ENTER
+STRING Get-LocalGroupMember Administrators | Format-Table Name
+ENTER
+
+DELAY 2000
